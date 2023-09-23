@@ -1,5 +1,7 @@
 
  // ====== HTML element selectors and event listerners =========
+
+ // Element selectors
  const body = document.body;
  const overlay = document.querySelector('.overlay');
  const form = document.querySelector('#todo-form');
@@ -54,39 +56,35 @@
     // Reset the input box
      form.reset();
 
-    // add new 'todo' to allTodo array
+    // add new 'todo' to allLinks array
      allLinks.push(url);
 
-    // repopulate HTML list 
-     populateTodoList(allLinks);
-
-    // save list to Local Storage
      saveTodoListToStorage(allLinks);
 
- }
-   
-// Function: pull in data from Local Storage on applicationpopulates HTML with a list of Todo 
-function populateTodoList(allTodos = []) {
-
-    // loop over all 'todos' and create a new todo for each element one by one
-    allLinks.innerHTML = allTodos
-    .map (
-        (todo) => `<li> <a class='todo' href= ${todo} target='_blank'> ${todo}</a> </li>`
-    )
-    .join(":");
-}
-
+        
 // Function: save todo list to Local Storage
-function saveTodoListToStorage(allTodos = []) {
-    localStorage.setItem('todo_list', JSON.stringify(allTodos));
+    function saveTodoListToStorage(links = []) {
+        localStorage.setItem('todo_list', JSON.stringify(links));
+
+     
+
+// Function: Pull 'populateTodoList(allLinks)' from Local Storage on application start
+
+     function populateTodoList(links = []) {
+
+        // loop over all 'todos' and create a new todo for each element one by one
+        todoList.innerHTML = links
+        .map (
+            (todo) => `<li> <a class='todo' href= ${todo} target='_blank'> ${todo}</a> </li>`
+        )
+        .join(":");
+    }
+   
+        // Pull 'populateTodoList(allLinks)' from Local Storage on application start
+        const allLinks = JSON.parse(localStorage.getItem('todo_list')) || [];
+        populateTodoList(allLinks);
+    
+    }
 
 }
-
-// Pull 'populateTodoList(allLinks)' from Local Storage on application start
-    const allTodos = JSON.parse(localStorage.getItem('todo_list')) || [];
-    populateTodoList(allTodos);
-
-
     
-
-
