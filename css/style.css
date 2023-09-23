@@ -95,6 +95,7 @@ body.focus-form .overlay {
     border-radius: 7px;
     background-color: rgb(243, 242, 241);
     text-decoration: none;
+    text-align: left;
     transition: 350ms ease all;
 }
 

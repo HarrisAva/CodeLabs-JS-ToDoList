@@ -7,7 +7,7 @@
  const form = document.querySelector('#todo-form');
  const input = document.querySelector('.todo-input');
  const todoList = document.querySelector('.todo-list');
- const allLinks = []; 
+ const allTodos = []; 
 
  // Event listeners for 'focus' event on the 'input' and runs the 'focusInput' function
  input.addEventListener('focus', focusInput);
@@ -37,17 +37,12 @@
      e.preventDefault();
 
      // grab info from the input box
-     const url = input.value;
+     const todoInput = input.value;
 
      // create a new list from anchor tag, add innerText, href and target attributes. Append the elements together
      const todoContainer = document.createElement('li');
      const newTodo = document.createElement('a');
      newTodo.className = 'todo';
-     newTodo.innerText = url;
-     newTodo.href = url;
-     newTodo.target = '_blank';
-
-    //   console.log("newTodo:", newTodo);
 
      // Dynamically insert into HTML
      todoContainer.appendChild(newTodo);
@@ -56,33 +51,33 @@
     // Reset the input box
      form.reset();
 
-    // add new 'todo' to allLinks array
-     allLinks.push(url);
+    // add new 'todo' to allTodos array
+     allTodos.push(todoInput);
 
-     saveTodoListToStorage(allLinks);
+     saveTodoListToStorage(allTodos);
 
         
 // Function: save todo list to Local Storage
-    function saveTodoListToStorage(links = []) {
-        localStorage.setItem('todo_list', JSON.stringify(links));
+    function saveTodoListToStorage(todos = []) {
+        localStorage.setItem('todo_list', JSON.stringify(todos));
 
      
 
-// Function: Pull 'populateTodoList(allLinks)' from Local Storage on application start
+// Function: Pull 'populateTodoList(allTodos)' from Local Storage on application start
 
-     function populateTodoList(links = []) {
+     function populateTodoList(todos = []) {
 
         // loop over all 'todos' and create a new todo for each element one by one
-        todoList.innerHTML = links
+        todoList.innerHTML = todos
         .map (
-            (todo) => `<li> <a class='todo' href= ${todo} target='_blank'> ${todo}</a> </li>`
+            (todo) => `<li class='todo-input' name="todo"> ${todo} </li>`
         )
-        .join(":");
+        .join("");
     }
-   
-        // Pull 'populateTodoList(allLinks)' from Local Storage on application start
-        const allLinks = JSON.parse(localStorage.getItem('todo_list')) || [];
-        populateTodoList(allLinks);
+
+        // Pull 'populateTodoList(allTodos)' from Local Storage on application start
+        const allTodos = JSON.parse(localStorage.getItem('todo_list')) || [];
+        populateTodoList(allTodos);
     
     }
 
