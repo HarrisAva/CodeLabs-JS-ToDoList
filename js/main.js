@@ -10,10 +10,10 @@
  const allLinks = []; 
 
  // Event listeners for 'focus' event on the 'input' and runs the 'focusInput' function
- input.addEventListener('focusin', focusInput);
+ input.addEventListener('focus', focusInput);
 
  // Event listerners for 'click' event on the 'overlay' and runs the 'endFocus' function
- overlay.addEventListener('focusout', endFocus);
+ overlay.addEventListener('click', endFocus);
 
  // Event listerner for 'submit' event on the 'form' and runs the 'createTodo' function
  form.addEventListener('submit', createTodo);
@@ -27,7 +27,7 @@
 
  // Function: Removes the 'focus-form' class on the body when the form is out of focus
  function endFocus() {
-     if (body.classList.contains('focus-form')) body.classList.remove ('focus-form');
+     body.classList.remove ('focus-form');
  }
 
  // Function: Create a new Todo when it is submitted
